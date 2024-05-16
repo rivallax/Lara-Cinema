@@ -9,3 +9,7 @@
 .seat.seat-active {
     @apply bg-green-500 text-gray-100;
 }
+
+.seat.seat-disabled {
+    @apply disabled:bg-indigo-300 disabled:cursor-not-allowed disabled:dark:bg-opacity-40 disabled:dark:bg-gray-300 disabled:dark:text-indigo-200;
+}

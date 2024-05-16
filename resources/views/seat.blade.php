@@ -9,21 +9,37 @@
     <div class="grid md:grid-cols-2 lg:grid-cols-2 sm:grid-cols-2 sm:grid-cols-1 mt-5 gap-4">
         <?php $i = "A" ?>
         @for($r = 0; $r < $movie->studio_capacity / 12; $r++)
-        {{-- membuat row $movie->studio_capacity 12--}}
             <div class="flex flex-nowrap items-center justify-evenly">
                 @for($c = 1; $c <= 6; $c++)
-                {{-- membuat kolom(button)6 (di kiri)--}}
-                <button class="seat" name="seat" value="{{ $i }}0{{ $c }}">
-                    {{ $i }}0{{ $c }}
-                </button> 
+                    @php 
+                        $col1 = $i . ($c < 10 ? '0' . $c : $c);
+                        $disabled = false;
+                        foreach ($history as $ticket) {
+                            if (in_array($col1, explode(',', $ticket->seat))) {
+                                $disabled = true;
+                                break;
+                            }
+                        }
+                    @endphp
+                    <button class="seat {{ $disabled ? 'seat-disabled' : '' }}" {{ $disabled ? 'disabled' : '' }} name="seat" value="{{ $col1 }}">
+                        {{ $col1 }}
+                    </button>
                 @endfor
             </div>
             <div class="flex flex-nowrap items-center justify-evenly">
                 @for($c = 7; $c <= 12; $c++)
-                {{-- membuat kolom(button)6 (di kanan) --}}
-                    <button class="seat" name="seat" value="{{ $i }}{{ ($c > 9 ? $c : '0' . $c) }}">
-                        {{ $i }}{{ ($c > 9 ? $c : '0' . $c) }}
-                        {{-- angka kurang dari 10 akan menampilkan A 01-09 --}}
+                    @php 
+                        $col2 = $i . ($c > 9 ? $c : '0' . $c);
+                        $disabled = false;
+                        foreach ($history as $ticket) {
+                            if (in_array($col2, explode(',', $ticket->seat))) {
+                                $disabled = true;
+                                break;
+                            }
+                        }
+                    @endphp
+                    <button class="seat {{ $disabled ? 'seat-disabled' : '' }}" {{ $disabled ? 'disabled' : '' }} name="seat" value="{{ $col2 }}">
+                        {{ $col2 }}
                     </button>
                 @endfor
             </div>
