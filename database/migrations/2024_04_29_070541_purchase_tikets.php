@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('purchase_tickets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('purchase_id');
-            $table->foreignId('seat', 255);
+            $table->string('seat', 255);
             $table->timestamps();
         });
     }

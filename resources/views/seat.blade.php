@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="flex items-center justify-center flex-col">
-        <h1 class="text-2xl font-bold text-indigo-500">{{ $movie->name }} ({{ $movie->studio_name }}){{ $movie->studio_name }}</h1>
+        <h1 class="text-2xl font-bold text-indigo-500">{{ $movie->name }} ({{ $movie->studio_name }})</h1>
         <p class="text-lg">{{ $date }} <span class="mx-5">|</span> {{ $time }}</p>
     </div>
     {{--menampilkan tampilan movie|studio dan date|time--}}
-    <div class="grid md:grid-cols-2 lg:grid-cols-2 sm:grid-rows-2 sm:grid-cols-1 mt-5 gap-4">
+    <div class="grid md:grid-cols-2 lg:grid-cols-2 sm:grid-cols-2 sm:grid-cols-1 mt-5 gap-4">
         <?php $i = "A" ?>
         @for($r = 0; $r < $movie->studio_capacity / 12; $r++)
         {{-- membuat row $movie->studio_capacity 12--}}
@@ -159,6 +159,8 @@
                     // Mengambil seat yang dipilih
                     seatSelectedH1.textContent = selectedSeatsText;
                     document.getElementById('selected-seats').value = selectedSeatsText;
+                    const z = document.getElementById('selected-seats').value = selectedSeatsText.split(', ');
+                    console.log(z);
                 } else {
                     confirmBtn.disabled = true;
                     seatSelectedH1.textContent = "No seat selected";
